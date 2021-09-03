@@ -1,0 +1,33 @@
+diff --git a/boards/hifive1/Makefile b/boards/hifive1/Makefile
+index 09ed959e2..67a630aa7 100644
+--- a/boards/hifive1/Makefile
++++ b/boards/hifive1/Makefile
+@@ -18,7 +18,7 @@ qemu: $(TOCK_ROOT_DIRECTORY)target/$(TARGET)/release/$(PLATFORM).elf
+ 	$(QEMU) -M sifive_e,revb=true -kernel $^  -nographic
+ 
+ qemu-app: $(TOCK_ROOT_DIRECTORY)target/$(TARGET)/release/$(PLATFORM).elf
+-	$(QEMU) -M sifive_e,revb=true -kernel $^ -device loader,file=$(APP),addr=0x20040000 -nographic
++	$(QEMU) -M sifive_e,revb=true -kernel $^ -device loader,file=$(APP),addr=0x20040100 -nographic
+ 
+ 
+ TOCKLOADER=tockloader
+diff --git a/boards/kernel_layout.ld b/boards/kernel_layout.ld
+index c789e8f36..c8bc1757e 100644
+--- a/boards/kernel_layout.ld
++++ b/boards/kernel_layout.ld
+@@ -230,6 +230,7 @@ SECTIONS
+     {
+         /* _sapps symbol used by Tock to look for first application. */
+         . = ALIGN(4);
++       . = . + 0x100;
+         _sapps = .;
+ 
+         /* Include placeholder bytes in this section so that the linker
+@@ -330,6 +331,7 @@ SECTIONS
+          * dynamically, requiring changes to this section.
+          */
+         . = ALIGN(MPU_MIN_ALIGN);
++       . = . + 0x100;
+         _sappmem = .;
+         *(.app_memory)
+     } > ram

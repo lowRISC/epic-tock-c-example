@@ -1,0 +1,9 @@
+/.config
+/build.log
+/build
+/elf2tab
+/libtock-c
+/llvm-project
+/qemu-6.1.0.tar.xz
+/qemu-6.1.0
+/tock
