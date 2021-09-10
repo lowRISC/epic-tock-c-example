@@ -11,6 +11,7 @@ elf2tab=elf2tab/target/debug/elf2tab
 
 run: $(example)/$(tbf) tock qemu
 	cd tock/boards/hifive1 && QEMU=../../tools/qemu/build/qemu-system-riscv32 APP=$(PWD)/$(example)/$(tbf) make qemu-app
+	cd tock/boards/opentitan/earlgrey-cw310 && OPENTITAN_BOOT_ROM=../../../tools/qemu-runner/opentitan-boot-rom.elf APP=$(PWD)/$(example)/$(tbf) make qemu-app
 
 relocate: tock
 	cd tock && patch -p1 < ../change-app-load-addr.diff
