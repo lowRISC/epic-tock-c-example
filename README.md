@@ -21,8 +21,15 @@ Use `make run` to build everything and run the example application. Use `make re
 ```
 $ make run
 # (...)
+HiFive1 initialization complete.
+Entering main loop.
 Hello World!
 ePIC example: x=42 *y=42 &x=0x800030d8 y=0x800030d8 &main=0x200400b2.
+# ctrl-a ctrl-x to quit QEMU
+# (...)
+OpenTitan initialisation complete. Entering main loop
+Hello World!
+ePIC example: x=42 *y=42 &x=0x100050d8 y=0x100050d8 &main=0x200300b2.
 # ctrl-a ctrl-x to quit QEMU
 
 $ make relocate
@@ -32,8 +39,14 @@ patching file boards/kernel_layout.ld
 
 $ make run
 # (...)
+HiFive1 initialization complete.
+Entering main loop.
 Hello World!
 ePIC example: x=42 *y=42 &x=0x800031d8 y=0x800031d8 &main=0x200401b2.
+# (...)
+OpenTitan initialisation complete. Entering main loop
+Hello World!
+ePIC example: x=42 *y=42 &x=0x100051d8 y=0x100051d8 &main=0x200301b2.
 ```
 
 ## Licensing
