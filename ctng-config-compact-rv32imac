@@ -1,13 +1,13 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# crosstool-NG 1.24.0.426_672c13e Configuration
+# crosstool-NG 1.24.0.498_5075e1f Configuration
 #
 CT_CONFIGURE_has_static_link=y
 CT_CONFIGURE_has_cxx11=y
 CT_CONFIGURE_has_wget=y
 CT_CONFIGURE_has_curl=y
-CT_CONFIGURE_has_meson=y
 CT_CONFIGURE_has_ninja=y
+CT_CONFIGURE_has_rsync=y
 CT_CONFIGURE_has_make_3_81_or_newer=y
 CT_CONFIGURE_has_make_4_0_or_newer=y
 CT_CONFIGURE_has_libtool_2_4_or_newer=y
@@ -20,14 +20,13 @@ CT_CONFIGURE_has_python_3_4_or_newer=y
 CT_CONFIGURE_has_bison_2_7_or_newer=y
 CT_CONFIGURE_has_python=y
 CT_CONFIGURE_has_dtc=y
-CT_CONFIGURE_has_svn=y
 CT_CONFIGURE_has_git=y
 CT_CONFIGURE_has_md5sum=y
 CT_CONFIGURE_has_sha1sum=y
 CT_CONFIGURE_has_sha256sum=y
 CT_CONFIGURE_has_sha512sum=y
 CT_CONFIGURE_has_install_with_strip_program=y
-CT_VERSION="1.24.0.426_672c13e"
+CT_VERSION="1.24.0.498_5075e1f"
 CT_VCHECK=""
 CT_CONFIG_VERSION_ENV="3"
 CT_CONFIG_VERSION_CURRENT="3"
@@ -270,6 +269,7 @@ CT_BINUTILS_BINUTILS_SHOW=y
 CT_BINUTILS_BINUTILS_PKG_KSYM="BINUTILS"
 CT_BINUTILS_DIR_NAME="binutils"
 CT_BINUTILS_USE_GNU=y
+# CT_BINUTILS_USE_LINARO is not set
 # CT_BINUTILS_USE_ORACLE is not set
 CT_BINUTILS_USE="BINUTILS"
 CT_BINUTILS_PKG_NAME="binutils"
@@ -316,24 +316,17 @@ CT_BINUTILS_later_than_2_30=y
 CT_BINUTILS_2_30_or_later=y
 CT_BINUTILS_later_than_2_27=y
 CT_BINUTILS_2_27_or_later=y
-CT_BINUTILS_later_than_2_25=y
-CT_BINUTILS_2_25_or_later=y
-CT_BINUTILS_later_than_2_23=y
-CT_BINUTILS_2_23_or_later=y
+CT_BINUTILS_later_than_2_26=y
+CT_BINUTILS_2_26_or_later=y
 
 #
 # GNU binutils
 #
-CT_BINUTILS_HAS_HASH_STYLE=y
-CT_BINUTILS_HAS_GOLD=y
-CT_BINUTILS_HAS_PLUGINS=y
-CT_BINUTILS_HAS_PKGVERSION_BUGURL=y
 CT_BINUTILS_LINKER_LD=y
 CT_BINUTILS_LINKERS_LIST="ld"
 CT_BINUTILS_LINKER_DEFAULT="bfd"
 # CT_BINUTILS_PLUGINS is not set
 CT_BINUTILS_RELRO=m
-CT_BINUTILS_DETERMINISTIC_ARCHIVES=y
 CT_BINUTILS_EXTRA_CONFIG_ARRAY=""
 CT_ALL_BINUTILS_CHOICES="BINUTILS"
 # end of Binary utilities
@@ -353,8 +346,6 @@ CT_LIBC_NEWLIB_SHOW=y
 #
 CT_LIBC_NEWLIB_PKG_KSYM="NEWLIB"
 CT_NEWLIB_DIR_NAME="newlib"
-CT_NEWLIB_USE_REDHAT=y
-CT_NEWLIB_USE="NEWLIB"
 CT_NEWLIB_PKG_NAME="newlib"
 CT_NEWLIB_SRC_RELEASE=y
 # CT_NEWLIB_SRC_DEVEL is not set
@@ -498,6 +489,7 @@ CT_CC_GCC_CONFIG_TLS=m
 #
 CT_CC_GCC_USE_GRAPHITE=y
 CT_CC_GCC_USE_LTO=y
+CT_CC_GCC_LTO_ZSTD=m
 
 #
 # Settings for libraries running on target
@@ -564,6 +556,7 @@ CT_GETTEXT_PATCH_GLOBAL=y
 # CT_GETTEXT_PATCH_LOCAL_BUNDLED is not set
 # CT_GETTEXT_PATCH_NONE is not set
 CT_GETTEXT_PATCH_ORDER="global"
+# CT_GETTEXT_V_0_21 is not set
 CT_GETTEXT_V_0_20_1=y
 # CT_GETTEXT_V_0_19_8_1 is not set
 CT_GETTEXT_VERSION="0.20.1"
@@ -613,17 +606,17 @@ CT_ISL_PATCH_GLOBAL=y
 # CT_ISL_PATCH_LOCAL_BUNDLED is not set
 # CT_ISL_PATCH_NONE is not set
 CT_ISL_PATCH_ORDER="global"
-# CT_ISL_V_0_24 is not set
+CT_ISL_V_0_24=y
 # CT_ISL_V_0_22 is not set
 # CT_ISL_V_0_21 is not set
-CT_ISL_V_0_20=y
+# CT_ISL_V_0_20 is not set
 # CT_ISL_V_0_19 is not set
 # CT_ISL_V_0_18 is not set
 # CT_ISL_V_0_17 is not set
 # CT_ISL_V_0_16 is not set
 # CT_ISL_V_0_15 is not set
-CT_ISL_VERSION="0.20"
-CT_ISL_MIRRORS="http://isl.gforge.inria.fr"
+CT_ISL_VERSION="0.24"
+CT_ISL_MIRRORS="https://libisl.sourceforge.io"
 CT_ISL_ARCHIVE_FILENAME="@{pkg_name}-@{version}"
 CT_ISL_ARCHIVE_DIRNAME="@{pkg_name}-@{version}"
 CT_ISL_ARCHIVE_FORMATS=".tar.xz .tar.bz2 .tar.gz"
@@ -748,7 +741,6 @@ CT_NCURSES_TARGET_CONFIG_ARGS=""
 # CT_NCURSES_TARGET_DISABLE_DB is not set
 CT_NCURSES_TARGET_FALLBACKS=""
 # CT_COMP_LIBS_NEWLIB_NANO is not set
-# CT_COMP_LIBS_PICOLIBC is not set
 CT_COMP_LIBS_ZLIB=y
 CT_COMP_LIBS_ZLIB_PKG_KSYM="ZLIB"
 CT_ZLIB_DIR_NAME="zlib"
