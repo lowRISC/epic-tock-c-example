@@ -17,7 +17,7 @@ relocate: tock
 	cd tock && patch -p1 < ../change-app-load-addr.diff
 
 $(example)/$(tbf): libtock-c $(elf2tab) $(HOME)/tools/gnu-elf-rv32imac-compact/bin/riscv32-unknown-elf-gcc $(HOME)/tools/gnu-elf-rv32imac-compact/bin/riscv32-unknown-elf-clang
-	cd $(example) && make V=1 TOCK_TARGETS="rv32imac|rv32imac" CC=-clang CPPFLAGS="-fepic" WLFLAGS="-Wl,--emit-relocs"
+	cd $(example) && make V=1 TOCK_TARGETS="rv32imac|rv32imac" CC=-clang CPPFLAGS="-fepic" WLFLAGS="-Wl,--emit-relocs -fuse-ld=lld"
 
 libtock-c:
 	git clone -b epic-example https://github.com/luismarques/libtock-c.git
@@ -29,7 +29,7 @@ $(elf2tab): elf2tab
 	cd elf2tab && cargo build
 
 elf2tab:
-	git clone -b rela https://github.com/luismarques/elf2tab.git
+	git clone -b rela_lld https://github.com/luismarques/elf2tab.git
 
 $(HOME)/tools/gnu-elf-rv32imac-compact/bin/riscv32-unknown-elf-gcc:
 	cp ctng-config-compact-rv32imac .config && ct-ng build
