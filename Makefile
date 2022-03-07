@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Don't go parallel
+# The ct-ng recipies for `riscv32-unknown-elf-gcc` shouldn't run in parallel.
 .NOTPARALLEL:
 
 export PATH := $(PWD)/elf2tab/target/debug:$(PATH)
