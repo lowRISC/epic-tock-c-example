@@ -47,4 +47,10 @@ llvm-project/build/bin/riscv32-unknown-elf-clang: llvm-project
 tock/tools/qemu: tock
 	cd tock && CI=y make ci-setup-qemu
 
-.PHONY: run relocate
+rebuild-newlib: libtock-c llvm-project/build/bin/riscv32-unknown-elf-clang
+	cd llvm-project/build/bin && ln -sf llvm-ar riscv64-unknown-elf-ar
+	cd llvm-project/build/bin && ln -sf llvm-ar riscv64-unknown-elf-ranlib
+	cd llvm-project/build/bin && ln -sf clang riscv64-unknown-elf-cc
+	cd libtock-c/newlib && make
+
+.PHONY: run relocate rebuild-newlib
