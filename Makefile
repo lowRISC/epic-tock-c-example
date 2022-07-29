@@ -2,7 +2,7 @@
 # Licensed under the Apache License, Version 2.0, see LICENSE for details.
 # SPDX-License-Identifier: Apache-2.0
 
-export PATH := $(PATH):$(HOME)/tools/gnu-elf-rv32imac-compact/bin
+export PATH := $(PATH):$(PWD)/llvm-project/build/bin
 export PATH := $(PWD)/elf2tab/target/debug:$(PATH)
 
 example=libtock-c/examples/c_hello
@@ -16,8 +16,11 @@ run: $(example)/$(tbf) tock tock/tools/qemu
 relocate: tock
 	cd tock && patch -p1 < ../change-app-load-addr.diff
 
-$(example)/$(tbf): libtock-c $(elf2tab) $(HOME)/tools/gnu-elf-rv32imac-compact/bin/riscv32-unknown-elf-gcc $(HOME)/tools/gnu-elf-rv32imac-compact/bin/riscv32-unknown-elf-clang
-	cd $(example) && make V=1 TOCK_TARGETS="rv32imac|rv32imac" CC=-clang CPPFLAGS="-fepic" WLFLAGS="-Wl,--emit-relocs -fuse-ld=lld"
+$(example)/$(tbf): libtock-c $(elf2tab) llvm-project/build/bin/riscv32-unknown-elf-clang libtock-c/newlib/newlib-4.1.0
+	cd $(example) && make V=1 TOCK_TARGETS="rv32imac|rv32imac" CC=-clang CPPFLAGS="-fepic -I$(PWD)/libtock-c/newlib/newlib-4.1.0/newlib/libc/include" WLFLAGS="-Wl,--emit-relocs -fuse-ld=lld"
+
+libtock-c/newlib/newlib-4.1.0: libtock-c
+	cd libtock-c/newlib && make newlib-4.1.0
 
 libtock-c:
 	git clone -b epic-example https://github.com/luismarques/libtock-c.git
@@ -31,14 +34,15 @@ $(elf2tab): elf2tab
 elf2tab:
 	git clone -b rela_lld https://github.com/luismarques/elf2tab.git
 
-$(HOME)/tools/gnu-elf-rv32imac-compact/bin/riscv32-unknown-elf-gcc:
-	cp ctng-config-compact-rv32imac .config && ct-ng build
-
 llvm-project:
 	git clone -b epic --depth=1 https://github.com/lowRISC/llvm-project.git
 
-$(HOME)/tools/gnu-elf-rv32imac-compact/bin/riscv32-unknown-elf-clang: llvm-project
-	mkdir -p llvm-project/build && cd llvm-project/build && cmake ../llvm -G Ninja -DCMAKE_BUILD_TYPE="Release" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DLLVM_ENABLE_LLD=True -DLLVM_TARGETS_TO_BUILD="RISCV" -DLLVM_ENABLE_PROJECTS="clang;lld" -DCMAKE_INSTALL_PREFIX=$(HOME)/tools/gnu-elf-rv32imac-compact -DCLANG_LINKS_TO_CREATE=riscv32-unknown-elf-clang && ninja install
+llvm-project/build/bin/riscv32-unknown-elf-clang: llvm-project
+	mkdir -p llvm-project/build && cd llvm-project/build && cmake ../llvm -G Ninja -DCMAKE_BUILD_TYPE="Release" -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DLLVM_ENABLE_LLD=True -DLLVM_TARGETS_TO_BUILD="RISCV" -DLLVM_ENABLE_PROJECTS="clang;lld" && ninja
+	cd llvm-project/build/bin && ln -sf clang riscv32-unknown-elf-clang
+	cd llvm-project/build/bin && ln -sf llvm-size riscv32-unknown-elf-size
+	cd llvm-project/build/bin && ln -sf llvm-ar riscv32-unknown-elf-ar
+	cd llvm-project/build/bin && ln -sf llvm-ar riscv32-unknown-elf-ranlib
 
 tock/tools/qemu: tock
 	cd tock && CI=y make ci-setup-qemu
