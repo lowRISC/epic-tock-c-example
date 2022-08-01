@@ -14,7 +14,7 @@ Build requirements:
 - crosstool-ng
 - rustup
 
-The other dependencies are installed automatically. This example has been tested against Tock commit `2910b1238`.
+The other dependencies are installed automatically. This example has been tested against Tock commit `2b044ef1c`.
 
 Use `make run` to build everything and run the example application. Use `make relocate` to patch Tock to load the app at different Flash and RAM memory addresses. For instance:
 
