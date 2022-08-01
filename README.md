@@ -2,7 +2,7 @@
 
 ## Overview
 
-lowRISC is working on a specification and [prototype toolchain implementation](https://github.com/lowRISC/llvm-project/commits/epic) of an Embedded PIC (ePIC) ABI for RISC-V.
+lowRISC is working on a [specification](https://github.com/luismarques/epic-spec) and [prototype toolchain implementation](https://github.com/lowRISC/llvm-project/commits/epic) of an Embedded PIC (ePIC) ABI for RISC-V.
 
 This repository illustrates how to use the work-in-progress ePIC toolchain implementation to create relocatable RISC-V Tock OS applications. It builds the libtock-c hello world example, `c_hello`, with an ePIC configuration and runs it under QEMU. That example has been slightly modified to print the addresses and values of some program symbols, to demonstrate the relocation capabilities.
 
